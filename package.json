@@ -1,0 +1,29 @@
+{
+  "name": "express-hapi-koa",
+  "version": "0.0.1",
+  "description": "Common handler for express, hapi and koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "hapi",
+    "koa"
+  ],
+  "author": "Nick Nance",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "hapi": "^13.4.1",
+    "koa": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3",
+    "nodemon": "^1.9.2",
+    "rimraf": "^2.5.2",
+    "sinon": "^1.17.4",
+    "typescript": "^1.8.10",
+    "typings": "^1.0.4"
+  }
+}

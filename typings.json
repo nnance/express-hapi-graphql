@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "graphql": "github:nitintutlani/typed-graphql"
+  },
+  "globalDependencies": {
+    "express": "registry:dt/express#4.0.0+20160317120654",
+    "hapi": "registry:dt/hapi#13.0.0+20160521152637",
+    "koa": "registry:dt/koa#2.0.0+20160317120654",
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "node": "registry:dt/node#6.0.0+20160524002506"
+  }
+}
