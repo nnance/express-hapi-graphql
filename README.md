@@ -1,2 +1,3 @@
 # express-hapi-graphql
-Common handler for express, hapi and koa
+
+A prototype of building a graphql server with a common core wrapped with express, hapi and koa
