@@ -10,11 +10,6 @@ const gqlServer = new GraphqlServer(schema)
 
 app.use(bodyParser.text())
 app.use('/', expressGQL(gqlServer))
-// app.use('/', bodyParser.text())
-// app.post('/', (req, res) => {
-//     console.log(req.body)
-//     res.end()
-// })
 
 app.listen(port, () => {
     console.log(`Server is listen on ${port}`)

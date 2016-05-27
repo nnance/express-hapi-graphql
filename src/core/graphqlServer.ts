@@ -19,22 +19,24 @@ export default class {
 
     fulfillQuery(source: string) : gqlResponse {
         let documentAST;
+
+        // parse request, reporting errors
         try {
             documentAST = graphql.parse(source);
         } catch (syntaxError) {
             // Return 400: Bad Request if any syntax errors errors exist.
             return { errorCode: 400, errors: [syntaxError] };
         }
+
         // Validate AST, reporting any errors.
         const validationErrors = GraphQLValidator.validate(this.schema, documentAST);
-
         if ( validationErrors.length ) {
             return { errorCode: 500, errors: validationErrors }
-        } else {
-            return {
-                data: {
-                    testString: 'Hello world'
-                }
+        }
+
+        return {
+            data: {
+                testString: 'Hello world'
             }
         }
     }
