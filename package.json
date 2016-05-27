@@ -1,5 +1,5 @@
 {
-  "name": "express-hapi-koa",
+  "name": "graphql-express-hapi",
   "version": "0.0.1",
   "description": "Common handler for express, hapi and koa",
   "main": "index.js",
