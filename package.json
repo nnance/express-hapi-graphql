@@ -4,6 +4,10 @@
   "description": "Common handler for express, hapi and koa",
   "main": "index.js",
   "scripts": {
+    "postinstall": "typings install",
+    "build": "tsc",
+    "typings:install": "typings install",
+    "dev:express": "nodemon ./dist/express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,6 +18,7 @@
   "author": "Nick Nance",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "hapi": "^13.4.1",
     "koa": "^1.2.0"

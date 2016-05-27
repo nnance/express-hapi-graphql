@@ -1,4 +1,5 @@
 import * as graphql from 'graphql'
+// can't use imports here because the validator is not defined in the current Typscript Definition
 const GraphQLValidator = require('graphql/validation')
 
 export interface gqlResponse {
@@ -16,7 +17,7 @@ export default class {
         this.schema = schema
     }
 
-    processRequst(source: string) : gqlResponse {
+    fulfillQuery(source: string) : gqlResponse {
         let documentAST;
         try {
             documentAST = graphql.parse(source);
@@ -27,9 +28,14 @@ export default class {
         // Validate AST, reporting any errors.
         const validationErrors = GraphQLValidator.validate(this.schema, documentAST);
 
-        return JSON.stringify({
-            firstName: 'Super',
-            lastName: 'Man'
-        })
+        if ( validationErrors.length ) {
+            return { errorCode: 500, errors: validationErrors }
+        } else {
+            return {
+                data: {
+                    testString: 'Hello world'
+                }
+            }
+        }
     }
 }

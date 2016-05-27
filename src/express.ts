@@ -1,21 +1,21 @@
-const express = require('express')
-import GraphqlServer from './graphqlServer'
+import * as express from 'express'
+import * as bodyParser from 'body-parser'
+import GraphqlServer from './core/graphqlServer'
+import expressGQL from './frameworks/expressGraphQL'
+import schema from './data/schema'
 
+const port = 3000
 const app = express()
-const graphql = new GraphqlServer()
+const gqlServer = new GraphqlServer(schema)
 
-function handler(req, res, next) {
-    const gqlResponse = graphql.processRequst(req.body)
+app.use(bodyParser.text())
+app.use('/', expressGQL(gqlServer))
+// app.use('/', bodyParser.text())
+// app.post('/', (req, res) => {
+//     console.log(req.body)
+//     res.end()
+// })
 
-    if (gqlResponse.errors) {
-        res.sendStatus(gqlResponse.errorCode)
-    } else {
-        res.set('Content-Type', 'application/json');
-        res.send(gqlResponse.data)
-    }
-    next()
-}
-
-app.use('/', handler)
-
-app.listen(3000)
+app.listen(port, () => {
+    console.log(`Server is listen on ${port}`)
+})
