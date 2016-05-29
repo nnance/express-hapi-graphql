@@ -1,8 +1,9 @@
+import * as hapi from 'hapi'
 import GraphqlServer from '../core/graphqlServer'
 
 
 export interface IRegister {
-    (server:any, options:any, next:any): void
+    (server: hapi.Server, options:any, next:any): void
     attributes?: any
 }
 
@@ -18,7 +19,7 @@ export default class Plugin {
         }
     }
 
-    register:IRegister = (server, options: IOptions, next) => {
+    register:IRegister = (server : hapi.Server, options: IOptions, next) => {
         server.route({
             method: 'GET',
             path: '/test',

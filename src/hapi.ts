@@ -1,4 +1,4 @@
-const Hapi = require('hapi');
+import * as hapi from 'hapi'
 import GraphqlServer from './core/graphqlServer'
 import schema from './data/schema'
 import HapiGQL from './frameworks/hapiGraphQL'
@@ -6,7 +6,7 @@ import HapiGQL from './frameworks/hapiGraphQL'
 const gqlServer = new GraphqlServer(schema)
 
 // Create a server with a host and port
-const server = new Hapi.Server();
+const server = new hapi.Server();
 server.connection({
     host: 'localhost',
     port: 8000
