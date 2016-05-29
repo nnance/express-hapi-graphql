@@ -1,6 +1,13 @@
+import GraphqlServer from '../core/graphqlServer'
+
+
 export interface IRegister {
     (server:any, options:any, next:any): void
     attributes?: any
+}
+
+export interface IOptions {
+    server: GraphqlServer
 }
 
 export default class Plugin {
@@ -11,12 +18,25 @@ export default class Plugin {
         }
     }
 
-    register:IRegister = (server, options, next) => {
+    register:IRegister = (server, options: IOptions, next) => {
         server.route({
             method: 'GET',
             path: '/test',
-            handler: function (request, reply) {
-                reply('Hello from the GraphqlServer')
+            handler: (request, reply) => {
+                reply('test passed')
+            }
+        })
+
+        server.route({
+            method: 'POST',
+            path: '/',
+            handler: (request, reply) => {
+                const gqlResponse = options.server.fulfillQuery(request.payload)
+                if (gqlResponse.errors) {
+                    reply({ errors: gqlResponse.errors }).code(gqlResponse.errorCode)
+                } else {
+                    reply({ data: gqlResponse.data })
+                }
             }
         })
         next()

@@ -1,5 +1,9 @@
 const Hapi = require('hapi');
+import GraphqlServer from './core/graphqlServer'
+import schema from './data/schema'
 import HapiGQL from './frameworks/hapiGraphQL'
+
+const gqlServer = new GraphqlServer(schema)
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -10,6 +14,7 @@ server.connection({
 
 server.register({
     register: new HapiGQL(),
+    options: { server: gqlServer },
     routes: { prefix: '/graphql' }
 })
 
