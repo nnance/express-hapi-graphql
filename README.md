@@ -18,6 +18,10 @@ A build will be automatically executed when running the application with
 ```
 npm run dev:express
 ```
+or for HAPI
+```
+npm run dev:hapi
+```
 
 ### install typings
 To install dependent typings
