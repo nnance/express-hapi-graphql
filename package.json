@@ -8,6 +8,7 @@
     "build": "tsc",
     "typings:install": "typings install",
     "dev:express": "nodemon ./dist/express.js",
+    "dev:hapi": "nodemon ./dist/hapi.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

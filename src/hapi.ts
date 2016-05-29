@@ -1,4 +1,5 @@
 const Hapi = require('hapi');
+import HapiGQL from './frameworks/hapiGraphQL'
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -7,19 +8,13 @@ server.connection({
     port: 8000
 });
 
-// Add the route
-server.route({
-    method: 'GET',
-    path:'/hello',
-    handler: function (request, reply) {
-
-        return reply('hello world');
-    }
-});
+server.register({
+    register: new HapiGQL(),
+    routes: { prefix: '/graphql' }
+})
 
 // Start the server
 server.start((err) => {
-
     if (err) {
         throw err;
     }
