@@ -1,27 +1,24 @@
-import * as hapi from 'hapi'
-import GraphqlServer from './core/graphqlServer'
-import schema from './data/schema'
-import HapiGQL from './frameworks/hapiGraphQL'
-
-const gqlServer = new GraphqlServer(schema)
+import * as hapi from "hapi";
+import schema from "./data/schema";
+import { HapiApollo } from "apollo-server";
 
 // Create a server with a host and port
 const server = new hapi.Server();
 server.connection({
-    host: 'localhost',
+    host: "localhost",
     port: 8000
 });
 
 server.register({
-    register: new HapiGQL(),
-    options: { server: gqlServer },
-    routes: { prefix: '/graphql' }
-})
+    register: new HapiApollo(),
+    options: { schema: schema },
+    routes: { prefix: "/graphql" }
+});
 
 // Start the server
 server.start((err) => {
     if (err) {
         throw err;
     }
-    console.log('Server running at:', server.info.uri);
+    console.log("Server running at:", server.info.uri);
 });

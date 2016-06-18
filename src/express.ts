@@ -1,16 +1,14 @@
-import * as express from 'express'
-import * as bodyParser from 'body-parser'
-import GraphqlServer from './core/graphqlServer'
-import expressGQL from './frameworks/expressGraphQL'
-import schema from './data/schema'
+import * as express from "express";
+import * as bodyParser from "body-parser";
+import { graphqlHTTP } from "apollo-server";
+import schema from "./data/schema";
 
-const port = 3000
-const app = express()
-const gqlServer = new GraphqlServer(schema)
+const port = 3000;
+const app = express();
 
-app.use(bodyParser.text())
-app.use('/', expressGQL(gqlServer))
+app.use(bodyParser.text());
+app.use("/", graphqlHTTP({schema}));
 
 app.listen(port, () => {
-    console.log(`Server is listen on ${port}`)
-})
+    console.log(`Server is listen on ${port}`);
+});
