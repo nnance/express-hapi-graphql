@@ -1,24 +1,40 @@
 import * as hapi from "hapi";
-import schema from "./data/schema";
-import { HapiApollo } from "apollo-server";
+import * as graphql from "graphql";
+import { ApolloHAPI, GraphiQLHAPI } from "apollo-server";
+
+const schema = new graphql.GraphQLSchema({
+    query: new graphql.GraphQLObjectType({
+        name: "Query",
+        fields: {
+            testString: {
+                type: graphql.GraphQLString,
+                resolve: () => "Hello world"
+            }
+        }
+    })
+});
 
 // Create a server with a host and port
 const server = new hapi.Server();
+const graphqlPort = 3000;
+
 server.connection({
     host: "localhost",
-    port: 8000
+    port: graphqlPort,
 });
 
 server.register({
-    register: new HapiApollo(),
-    options: { schema: schema },
-    routes: { prefix: "/graphql" }
+    register: new ApolloHAPI(),
+    options: {schema},
+    routes: { prefix: "/graphql" },
 });
 
-// Start the server
-server.start((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log("Server running at:", server.info.uri);
+server.register({
+    register: new GraphiQLHAPI(),
+    options: { endpointURL: "/graphql" },
+    routes: { prefix: "/graphql" },
+});
+
+server.start(() => {
+  console.log(`Server is listen on ${graphqlPort}`);
 });
