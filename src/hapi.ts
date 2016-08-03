@@ -1,27 +1,40 @@
-import * as hapi from 'hapi'
-import GraphqlServer from './core/graphqlServer'
-import schema from './data/schema'
-import HapiGQL from './frameworks/hapiGraphQL'
+import * as hapi from "hapi";
+import * as graphql from "graphql";
+import { ApolloHAPI, GraphiQLHAPI } from "apollo-server";
 
-const gqlServer = new GraphqlServer(schema)
+const schema = new graphql.GraphQLSchema({
+    query: new graphql.GraphQLObjectType({
+        name: "Query",
+        fields: {
+            testString: {
+                type: graphql.GraphQLString,
+                resolve: () => "Hello world"
+            }
+        }
+    })
+});
 
 // Create a server with a host and port
 const server = new hapi.Server();
+const graphqlPort = 3000;
+
 server.connection({
-    host: 'localhost',
-    port: 8000
+    host: "localhost",
+    port: graphqlPort,
 });
 
 server.register({
-    register: new HapiGQL(),
-    options: { server: gqlServer },
-    routes: { prefix: '/graphql' }
-})
+    register: new ApolloHAPI(),
+    options: {schema},
+    routes: { prefix: "/graphql" },
+});
 
-// Start the server
-server.start((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('Server running at:', server.info.uri);
+server.register({
+    register: new GraphiQLHAPI(),
+    options: { endpointURL: "/graphql" },
+    routes: { prefix: "/graphql" },
+});
+
+server.start(() => {
+  console.log(`Server is listen on ${graphqlPort}`);
 });
