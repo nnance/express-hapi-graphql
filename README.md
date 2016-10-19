@@ -1,6 +1,6 @@
 # express-hapi-graphql
 
-A prototype of building a graphql server with a common core wrapped with express, hapi and koa
+A prototype of building a GraphQL server with Apollo Server wrapped with Express, Hapi and KOA
 
 
 ## dependencies
@@ -21,11 +21,4 @@ npm run dev:express
 or for HAPI
 ```
 npm run dev:hapi
-```
-
-### install typings
-To install dependent typings
-
-```
-npm run typings:install xxx --save -global
 ```

@@ -1,11 +1,11 @@
-import * as graphql from "graphql";
+import {GraphQLSchema, GraphQLObjectType, GraphQLString} from "graphql";
 
-export default new graphql.GraphQLSchema({
-    query: new graphql.GraphQLObjectType({
+export default new GraphQLSchema({
+    query: new GraphQLObjectType({
         name: "Query",
         fields: {
             testString: {
-                type: graphql.GraphQLString,
+                type: GraphQLString,
                 resolve: () => "Hello world"
             }
         }

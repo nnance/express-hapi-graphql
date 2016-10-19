@@ -1,12 +1,12 @@
 {
   "name": "graphql-express-hapi",
-  "version": "0.0.1",
-  "description": "Common handler for express, hapi and koa",
-  "main": "index.js",
+  "version": "0.0.2",
+  "description": "A prototype of building a GraphQL server with Apollo Server wrapped with Express, Hapi and KOA",
+  "repository": "git@github.com:nnance/express-hapi-graphql.git",
+  "main": "./dist/hapi.js",
   "scripts": {
-    "postinstall": "typings install",
     "build": "tsc",
-    "typings:install": "typings install",
+    "postinstall": "typings i",
     "dev:express": "nodemon ./dist/express.js",
     "dev:hapi": "nodemon ./dist/hapi.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,19 +19,23 @@
   "author": "Nick Nance",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^0.2.1",
+    "apollo-server": "^0.3.0",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "graphql": "^0.6.0",
+    "graphql": "^0.7.0",
     "hapi": "^13.4.1",
     "koa": "^1.2.0"
   },
   "devDependencies": {
+    "@types/body-parser": "0.0.33",
+    "@types/express": "^4.0.33",
+    "@types/hapi": "^13.0.36",
+    "@types/koa": "^2.0.33",
     "mocha": "^2.5.3",
     "nodemon": "^1.9.2",
     "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
-    "typescript": "^1.8.10",
-    "typings": "^1.0.4"
+    "typescript": "^2.0.0",
+    "typings": "^1.3.2"
   }
 }
