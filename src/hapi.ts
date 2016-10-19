@@ -1,5 +1,4 @@
 import * as hapi from "hapi";
-import * as graphql from "graphql";
 import { apolloHapi, graphiqlHapi } from "apollo-server";
 import schema from "./schema";
 
@@ -13,21 +12,21 @@ server.connection({
 });
 
 server.register({
-    register: apolloHapi,
     options: {
+      apolloOptions: () => ({schema}),
         path: "/graphql",
-        apolloOptions: () => ({schema}),
-    }
+    },
+    register: apolloHapi,
 });
 
 server.register({
-    register: graphiqlHapi,
     options: {
-        path: "/graphql",
         graphiqlOptions: {
-            endpointURL: "/graphql"
+            endpointURL: "/graphql",
         },
+        path: "/graphql",
     },
+    register: graphiqlHapi,
 });
 
 server.start(() => {

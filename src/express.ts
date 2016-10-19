@@ -9,14 +9,14 @@ const app = express();
 
 const schema = new graphql.GraphQLSchema({
     query: new graphql.GraphQLObjectType({
-        name: "Query",
         fields: {
             testString: {
+                resolve: () => "Hello world",
                 type: graphql.GraphQLString,
-                resolve: () => "Hello world"
-            }
-        }
-    })
+            },
+        },
+        name: "Query",
+    }),
 });
 
 app.use(bodyParser.json());

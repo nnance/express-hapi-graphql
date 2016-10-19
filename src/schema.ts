@@ -2,12 +2,12 @@ import {GraphQLSchema, GraphQLObjectType, GraphQLString} from "graphql";
 
 export default new GraphQLSchema({
     query: new GraphQLObjectType({
-        name: "Query",
         fields: {
             testString: {
+                resolve: () => "Hello world",
                 type: GraphQLString,
-                resolve: () => "Hello world"
-            }
-        }
-    })
+            },
+        },
+        name: "Query",
+    }),
 });
