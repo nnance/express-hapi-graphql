@@ -1,7 +1,7 @@
 import * as graphql from "graphql";
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import { apolloExpress, graphiqlExpress } from "apollo-server";
+import { graphqlExpress, graphiqlExpress } from "graphql-server-express";
 
 const port = 3000;
 const endpointURL = "/graphql";
@@ -21,7 +21,7 @@ const schema = new graphql.GraphQLSchema({
 
 app.use(bodyParser.json());
 app.get("/", graphiqlExpress({endpointURL}));
-app.post(endpointURL, apolloExpress({schema}));
+app.post(endpointURL, graphqlExpress({schema}));
 
 app.listen(port, () => {
     console.log(`Server is listen on ${port}`);

@@ -6,7 +6,6 @@
   "main": "./dist/hapi.js",
   "scripts": {
     "build": "tsc",
-    "postinstall": "typings i",
     "dev:express": "nodemon ./dist/express.js",
     "dev:hapi": "nodemon ./dist/hapi.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,19 +18,21 @@
   "author": "Nick Nance",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^0.3.0",
+    "graphql-server-hapi": "^0.4.0",
+    "graphql-server-express": "^0.4.0",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "graphql": "^0.7.0",
     "hapi": "^13.4.1",
-    "koa": "^1.2.0",
     "typed-graphql": "^1.0.2"
   },
   "devDependencies": {
     "@types/body-parser": "0.0.33",
     "@types/express": "^4.0.33",
     "@types/hapi": "^13.0.36",
-    "@types/koa": "^2.0.33",
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.46",
+    "@types/sinon": "^1.16.31",
     "mocha": "^2.5.3",
     "nodemon": "^1.9.2",
     "rimraf": "^2.5.2",

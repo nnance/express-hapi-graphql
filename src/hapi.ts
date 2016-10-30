@@ -1,5 +1,5 @@
 import * as hapi from "hapi";
-import { apolloHapi, graphiqlHapi } from "apollo-server";
+import { graphqlHapi, graphiqlHapi } from "graphql-server-hapi";
 import schema from "./schema";
 
 // Create a server with a host and port
@@ -13,10 +13,10 @@ server.connection({
 
 server.register({
     options: {
-      apolloOptions: () => ({schema}),
+        graphqlOptions: { schema },
         path: "/graphql",
     },
-    register: apolloHapi,
+    register: graphqlHapi,
 });
 
 server.register({
@@ -24,12 +24,12 @@ server.register({
         graphiqlOptions: {
             endpointURL: "/graphql",
         },
-        path: "/graphql",
+        path: "/",
     },
     register: graphiqlHapi,
 });
 
 server.start(() => {
-  console.log(`Server is listen on ${graphqlPort}`);
-  console.log("open browser to http://localhost:3000/graphql");
+    console.log(`Server is listen on ${graphqlPort}`);
+    console.log(`open browser to http://localhost:${graphqlPort}`);
 });
