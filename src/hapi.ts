@@ -1,20 +1,20 @@
-import { graphiqlHapi, graphqlHapi } from "graphql-server-hapi"
-import * as hapi from "hapi"
-import schema from "./schema"
+import { graphiqlHapi, graphqlHapi } from 'graphql-server-hapi'
+import * as hapi from 'hapi'
+import schema from './schema'
 
 // Create a server with a host and port
 const server = new hapi.Server()
 const graphqlPort = 3000
 
 server.connection({
-    host: "localhost",
+    host: 'localhost',
     port: graphqlPort,
 })
 
 server.register({
     options: {
         graphqlOptions: { schema },
-        path: "/graphql",
+        path: '/graphql',
     },
     register: graphqlHapi,
 })
@@ -22,9 +22,9 @@ server.register({
 server.register({
     options: {
         graphiqlOptions: {
-            endpointURL: "/graphql",
+            endpointURL: '/graphql',
         },
-        path: "/",
+        path: '/',
     },
     register: graphiqlHapi,
 })
