@@ -1,15 +1,15 @@
-import * as hapi from "hapi";
-import { graphqlHapi, graphiqlHapi } from "graphql-server-hapi";
-import schema from "./schema";
+import { graphiqlHapi, graphqlHapi } from "graphql-server-hapi"
+import * as hapi from "hapi"
+import schema from "./schema"
 
 // Create a server with a host and port
-const server = new hapi.Server();
-const graphqlPort = 3000;
+const server = new hapi.Server()
+const graphqlPort = 3000
 
 server.connection({
     host: "localhost",
     port: graphqlPort,
-});
+})
 
 server.register({
     options: {
@@ -17,7 +17,7 @@ server.register({
         path: "/graphql",
     },
     register: graphqlHapi,
-});
+})
 
 server.register({
     options: {
@@ -27,9 +27,9 @@ server.register({
         path: "/",
     },
     register: graphiqlHapi,
-});
+})
 
 server.start(() => {
-    console.log(`Server is listen on ${graphqlPort}`);
-    console.log(`open browser to http://localhost:${graphqlPort}`);
-});
+    console.log(`Server is listen on ${graphqlPort}`)
+    console.log(`open browser to http://localhost:${graphqlPort}`)
+})

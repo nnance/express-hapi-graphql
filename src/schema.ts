@@ -1,4 +1,4 @@
-import {GraphQLSchema, GraphQLObjectType, GraphQLString} from "graphql";
+import {GraphQLObjectType, GraphQLSchema, GraphQLString} from "graphql"
 
 export default new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -10,4 +10,4 @@ export default new GraphQLSchema({
         },
         name: "Query",
     }),
-});
+})
