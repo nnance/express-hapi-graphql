@@ -14,3 +14,5 @@ node_modules
 # ignore idea project files
 .idea
 
+# mac os files
+.DS_STORE

@@ -1,6 +1,6 @@
+import { graphiqlExpress, graphqlExpress } from 'apollo-server-express'
 import * as bodyParser from 'body-parser'
 import * as express from 'express'
-import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
 import schema from './schema'
 
 const port = 3000

@@ -18,17 +18,18 @@
   "author": "Nick Nance",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-express": "^1.4.0",
+    "apollo-server-hapi": "^1.4.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "graphql": "^0.9.1",
-    "graphql-server-express": "^0.7.2",
-    "graphql-server-hapi": "^0.7.2",
-    "hapi": "^16.1.1"
+    "graphql": "^0.13.2",
+    "hapi": "^17.5.2"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.3",
     "@types/express": "^4.0.35",
     "@types/graphql": "^0.9.1",
+    "@types/hapi": "^17.0.15",
     "nodemon": "^1.11.0",
     "rimraf": "^2.6.1",
     "tslint": "^5.3.2",

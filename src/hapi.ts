@@ -1,35 +1,41 @@
-import { graphiqlHapi, graphqlHapi } from 'graphql-server-hapi'
-import * as hapi from 'hapi'
+import { graphiqlHapi, graphqlHapi } from 'apollo-server-hapi'
+import { Server } from 'hapi'
 import schema from './schema'
 
-// Create a server with a host and port
-const server = new hapi.Server()
-const graphqlPort = 3000
+async function startServer() {
+    // Create a server with a host and port
+    const options = {
+        host: 'localhost',
+        port: 3000,
+    }
 
-server.connection({
-    host: 'localhost',
-    port: graphqlPort,
-})
+    const server = new Server(options)
 
-server.register({
-    options: {
-        graphqlOptions: { schema },
-        path: '/graphql',
-    },
-    register: graphqlHapi,
-})
-
-server.register({
-    options: {
-        graphiqlOptions: {
-            endpointURL: '/graphql',
+    await server.register({
+        options: {
+            graphqlOptions: { schema },
+            path: '/graphql',
         },
-        path: '/',
-    },
-    register: graphiqlHapi,
-})
+        plugin: graphqlHapi,
+    })
 
-server.start(() => {
-    console.log(`Server is listen on ${graphqlPort}`)
-    console.log(`open browser to http://localhost:${graphqlPort}`)
-})
+    await server.register({
+        options: {
+            graphiqlOptions: {
+                endpointURL: '/graphql',
+            },
+            path: '/',
+        },
+        plugin: graphiqlHapi,
+    })
+
+    try {
+        await server.start()
+        console.log(`Server is listen on ${options.port}`)
+        console.log(`open browser to http://localhost:${options.port}`)
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+startServer().catch((e) => console.error(e))
